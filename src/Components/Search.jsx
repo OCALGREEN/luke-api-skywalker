@@ -7,6 +7,7 @@ const Search = () => {
     const [id, setId] = useState("")
     const [isSubmitted, setIsSubmitted] = useState(false)  
     const [starWars, setStarWars] = useState()
+    const [homeWorld, setHomeWorld] = useState(""); 
     // ERROR VAR
     const [searchOptionError, setSearchOptionError] = useState("")
     const [idError, setIdError] = useState("")
@@ -66,6 +67,11 @@ const Search = () => {
     }
     const message = () => {
         if(searchOption === "people"){
+            axios.get(starWars.homeworld)
+            .then(homeworld=>{
+                setHomeWorld(homeworld.data.name)
+            })
+            .catch(err=>console.log(err))
             return (
                 <div>
                     <h1>Name: {starWars.name}</h1>
@@ -73,6 +79,7 @@ const Search = () => {
                     <h2>Mass: {starWars.mass} kg</h2>
                     <h2>Hair Color: {starWars.hair_color}</h2>
                     <h2>Skin Color: {starWars.skin_color}</h2>
+                    <h2>Home World: {homeWorld}</h2>
                 </div>
             )
         }
